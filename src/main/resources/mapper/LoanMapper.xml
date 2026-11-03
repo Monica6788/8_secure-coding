@@ -17,7 +17,7 @@
     </select>
 
     <!-- =========================================================================
-         [실습 문제 1] 잔액 하한 조건을 추가한 안전한 조회 쿼리 만들기 (1/2)
+         [실습 문제 1] 잔액 하한 조건을 추가한 안전한 조회 쿼리 만들기 (1/2) TODO
          =========================================================================
          목표: 위 'findByCustomerSafe' 쿼리를 참고하여, 특정 고객(customerId)의 대출 중
                잔액(balance)이 최소잔액(minBalance) 이상인 데이터만 조회하는 쿼리를 작성하세요.
@@ -29,15 +29,13 @@
             - 고객 ID 파라미터 이름: #{customerId}
             - 최소 잔액 파라미터 이름: #{minBalance}
             - SQL 조건식 예시: WHERE customer_id = ... AND balance >= ...
-         4. 이 파일 작성이 끝나면 LoanMapper.java 파일로 이동해 (2/2) 단계도 완성하세요.
+         4. 이 파일 작성이 끝나면 LoanMapper.java 파일로 이동해 (2/2) 단계도 완성하세요.  COMPLETED
     ========================================================================== -->
-    <!--
     <select id="findByCustomerMin" resultType="edu.secure.lab.domain.Loan">
         SELECT loan_id, customer_id, balance, status
           FROM loan
-         WHERE 여기에_안전한_바인딩_조건을_작성하세요
+         WHERE customer_id = #{customerId} AND balance >= #{minBalance}
     </select>
-    -->
 
     <!-- ORDER BY 컬럼명은 바인딩 불가. Service 에서 허용 목록으로 검증한 값만 전달해야 한다 -->
     <select id="findByCustomerSorted" resultType="edu.secure.lab.domain.Loan">

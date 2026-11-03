@@ -93,16 +93,24 @@ public class LoanService {
         //
         // 단계별 힌트:
         // Step 1. 원금(principal)을 BigDecimal.valueOf(principal) 로 변환합니다.
+    	BigDecimal principalBD = BigDecimal.valueOf(principal);
+    	
         // Step 2. 연이율 문자열(annualRate)은 오차가 없도록 new BigDecimal(annualRate) 로 생성한 뒤
         //         .multiply(...) 로 원금과 곱합니다.
+    	BigDecimal annualRateBD = new BigDecimal(annualRate);
+    	BigDecimal yearlyInterest = principalBD.multiply(annualRateBD);
+    	
         // Step 3. 12개월로 나누기 위해 .divide(BigDecimal.valueOf(12), 0, 반올림모드) 를 호출합니다.
         //         - 두 번째 인자 0 은 '소수점 0번째 자리(원 단위)까지 남긴다'는 뜻입니다.
         //         - 세 번째 인자에는 반올림(RoundingMode.HALF_UP) 대신
         //           절사(버림)를 뜻하는 RoundingMode.DOWN 을 넣으세요!
+    	BigDecimal monthlyInterest = yearlyInterest.divide(BigDecimal.valueOf(12), 0, RoundingMode.DOWN);
+    	
         // Step 4. 마지막에 .longValueExact() 를 붙여 long 타입으로 반환하세요.
+    	return monthlyInterest.longValueExact();
         // =====================================================================
 
-        return 0L; // TODO: 이 줄을 지우고 위 Step 1~4를 연결한 계산식을 반환하세요.
+//        return 0L; // TODO: 이 줄을 지우고 위 Step 1~4를 연결한 계산식을 반환하세요.
     }
 
     private static void sleep(long millis) {
